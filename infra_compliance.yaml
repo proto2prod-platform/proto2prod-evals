@@ -1,0 +1,7 @@
+# Evals for infrastructure compliance
+checks:
+  - name: infra_compliance
+    description: "Validate infrastructure SBOM against compliance policies."
+rules:
+  - policy: infra_policy.rego
+    input: sbom.json

@@ -1,0 +1,6 @@
+# Evals for ARC42 consistency
+checks:
+  - name: arc42_consistency
+    description: "Ensure documentation sections follow the ARC42 spec consistently."
+rules:
+  - require_sections: [ 'Overview', 'Constraints', 'Context', 'Solution', 'Quality' ]

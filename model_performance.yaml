@@ -1,0 +1,9 @@
+# Evals for model performance
+checks:
+  - name: model_performance
+    description: "Ensure model metrics meet performance thresholds."
+rules:
+  - metric: accuracy
+    min_value: 0.8
+  - metric: latency
+    max_value: 200  # ms
