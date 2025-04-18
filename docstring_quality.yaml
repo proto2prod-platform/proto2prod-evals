@@ -1,0 +1,7 @@
+# Evals for docstring quality
+checks:
+  - name: docstring_quality
+    description: "Validate that module and function docstrings meet quality standards."
+rules:
+  - max_length: 120
+  - require_summary_line: true
