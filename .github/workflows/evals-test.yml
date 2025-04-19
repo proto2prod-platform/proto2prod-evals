@@ -10,9 +10,9 @@ jobs:
   run-evals:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
       # Add step to install dependencies if solvers need any
@@ -20,7 +20,18 @@ jobs:
       #   run: |
       #     pip install -r requirements.txt || echo "No requirements file"
       - name: Run docstring solver stub
-        run: python solvers/docstring_solver.py .
+        run: python solvers/docstring_solver.py . # Pass current dir as target
       - name: Run ARC42 solver stub
-        run: python solvers/arc42_solver.py .
+        run: python solvers/arc42_solver.py . # Pass current dir as target
       # Add steps for other solvers as they are created
+      - name: Validate YAML files
+        run: |
+          pip install pyyaml
+          python -c "import yaml; import os; success=True; \
+          for f in os.listdir('.'): \
+            if f.endswith('.yaml'): \
+              print(f'Validating {f}'); \
+              try: \
+                with open(f, 'r') as stream: yaml.safe_load(stream); \
+              except Exception as e: print(f'Error in {f}: {e}'); success=False; \
+          if not success: exit(1)"
